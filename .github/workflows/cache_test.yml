@@ -1,0 +1,35 @@
+name: Cache Test
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cache:
+    runs-on: self-hosted
+    steps:
+      - name: Restore
+        uses: actions/cache/restore@v3
+        with:
+          path: tmp/test-restored.log
+          key: test_key
+
+      - name: Do something
+        run: |
+          echo "Showing restored log"
+          ls tmp/
+          cat tmp/test-restored.log
+          echo "Generate a new log"
+          echo $(date '+%Y-%m-%d %H:%M:%s') > tmp/test-cached.log
+
+      - name: Cache
+        if: always()
+        uses: actions/cache/save@v3
+        with:
+          path: tmp/test-cached.log
+          key: test-key-${{ github.run_id }} # Can use time based key as well
+          restore-keys: |
+            test-key
