@@ -11,6 +11,13 @@ jobs:
   cache:
     runs-on: ubuntu-latest
     steps:
+      - name: Cache Directly
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: tmp/directly.log
+          key: directly-${{ github.run_id }}-${{ hashFiles('**/directly.log') }}
+
       - name: Restore
         uses: actions/cache/restore@v3
         with:
@@ -26,9 +33,15 @@ jobs:
           ls tmp/
           cp tmp/test-cached.log tmp/test-restored.log || true
           touch tmp/test-restored.log
+          echo "-------cache/restore--------"
           cat tmp/test-restored.log
-          echo "Generate a new log"
-          echo $(date '+%Y-%m-%d %H:%M:%s') > tmp/test-cached.log
+          echo "-------directly--------"
+          cat tmp/directly.lol
+
+          D=$(date '+%Y-%m-%d %H:%M:%s')
+          echo "Generate a new log: $D"
+          echo $D > tmp/test-cached.log
+          echo $D > tmp/directly.log
 
       - name: Cache
         if: always()
