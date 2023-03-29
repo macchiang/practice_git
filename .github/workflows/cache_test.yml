@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   cache:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Restore
         uses: actions/cache/restore@v3
