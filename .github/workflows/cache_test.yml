@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "date=$(date +%s)" >>> $GITHUB_OUTPUT
+        run: echo "date=$(date +%s)" >> $GITHUB_OUTPUT
       - name: Cache Directly
         id: cache
         uses: actions/cache@v3
