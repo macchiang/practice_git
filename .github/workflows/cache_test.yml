@@ -22,6 +22,10 @@ jobs:
           key: directly-${{ github.run_id }}-${{ steps.date.outputs.date }}
           restore-keys: |
             directly-
+      - name: Copy the parallel runtime file
+        if: steps.cache-runtime-log.outputs.cache-hit
+        run: |
+          cp tmp/directly.log tmp/directly_restored.log
       - name: Restore
         uses: actions/cache/restore@v3
         with:
@@ -40,8 +44,8 @@ jobs:
           touch tmp/test-restored.log
           cat tmp/test-restored.log
           echo "-------directly--------"
-          touch tmp/directly.log
-          cat tmp/directly.log
+          touch tmp/directly_restored.log
+          cat tmp/directly_restored.log
 
           D=$(date '+%Y-%m-%d %H:%M:%s')
           echo "Generate a new log: $D"
