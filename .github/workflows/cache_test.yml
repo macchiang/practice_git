@@ -22,6 +22,7 @@ jobs:
           echo "Showing restored log"
           mkdir -p tmp
           ls tmp/
+          touch tmp/test-restored.log
           cat tmp/test-restored.log
           echo "Generate a new log"
           echo $(date '+%Y-%m-%d %H:%M:%s') > tmp/test-cached.log
