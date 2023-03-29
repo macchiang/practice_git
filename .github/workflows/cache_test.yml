@@ -15,7 +15,8 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: tmp/test-restored.log
-          key: test-key
+          restore-keys: |
+            test-key
 
       - name: Do something
         run: |
@@ -32,4 +33,4 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: tmp/test-cached.log
-          key: test-key-${{ github.run_id }} # Can use time based key as well
+          key: test-key-${{ github.run_id }}-${{ hashFiles('**/test-cached.log') }} # Can use time based key as well
