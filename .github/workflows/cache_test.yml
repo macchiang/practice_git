@@ -17,7 +17,8 @@ jobs:
         with:
           path: tmp/directly.log
           key: directly-${{ github.run_id }}-${{ hashFiles('**/directly.log') }}
-
+          restore-keys: |
+            directly-
       - name: Restore
         uses: actions/cache/restore@v3
         with:
@@ -36,7 +37,7 @@ jobs:
           echo "-------cache/restore--------"
           cat tmp/test-restored.log
           echo "-------directly--------"
-          cat tmp/directly.lol
+          cat tmp/directly.log
 
           D=$(date '+%Y-%m-%d %H:%M:%s')
           echo "Generate a new log: $D"
