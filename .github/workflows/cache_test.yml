@@ -23,7 +23,7 @@ jobs:
           restore-keys: |
             directly-
       - name: Copy the directly file
-        if: steps.cache-runtime-log.outputs.cache-hit == 'true'
+        if: steps.cache.outputs.cache-hit
         run: |
           cp tmp/directly.log tmp/directly_restored.log
       - name: Restore
