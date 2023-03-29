@@ -22,8 +22,8 @@ jobs:
           key: directly-${{ github.run_id }}-${{ steps.date.outputs.date }}
           restore-keys: |
             directly-
-      - name: Copy the parallel runtime file
-        if: steps.cache-runtime-log.outputs.cache-hit
+      - name: Copy the directly file
+        if: steps.cache-runtime-log.outputs.cache-hit == 'true'
         run: |
           cp tmp/directly.log tmp/directly_restored.log
       - name: Restore
