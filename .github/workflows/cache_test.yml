@@ -14,7 +14,7 @@ jobs:
       - name: Restore
         uses: actions/cache/restore@v3
         with:
-          path: tmp/test-restored.log
+          path: tmp/test-cached.log
           key: test-key
           restore-keys: |
             test-key
@@ -24,6 +24,7 @@ jobs:
           echo "Showing restored log"
           mkdir -p tmp
           ls tmp/
+          cp tmp/test-cached.log tmp/test-restored.log || true
           touch tmp/test-restored.log
           cat tmp/test-restored.log
           echo "Generate a new log"
