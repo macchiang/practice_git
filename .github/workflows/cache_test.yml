@@ -33,10 +33,11 @@ jobs:
           mkdir -p tmp
           ls tmp/
           cp tmp/test-cached.log tmp/test-restored.log || true
-          touch tmp/test-restored.log
           echo "-------cache/restore--------"
+          touch tmp/test-restored.log
           cat tmp/test-restored.log
           echo "-------directly--------"
+          touch tmp/directly.log
           cat tmp/directly.log
 
           D=$(date '+%Y-%m-%d %H:%M:%s')
