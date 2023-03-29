@@ -20,6 +20,7 @@ jobs:
       - name: Do something
         run: |
           echo "Showing restored log"
+          mkdir -p tmp
           ls tmp/
           cat tmp/test-restored.log
           echo "Generate a new log"
